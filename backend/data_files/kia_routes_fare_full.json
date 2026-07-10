@@ -1,0 +1,1041 @@
+{
+  "vayu_vajra_kia_routes": {
+    "KIA-4": {
+      "route_info": "HAL MAIN GATE TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Hebbala",
+          "fare": 210.0
+        },
+        {
+          "stop_name": "Mekhri Circle",
+          "fare": 240.0
+        },
+        {
+          "stop_name": "JC Nagara",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Nandidurga Road",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Coles Park",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "MEG Centre",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Trinity Circle",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Halasuru",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Indiranagara KFC",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "HAL Main Gate",
+          "fare": 310.0
+        }
+      ]
+    },
+    "KIA-4A": {
+      "route_info": "WHITEFIELD TTMC TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Hebbala",
+          "fare": 210.0
+        },
+        {
+          "stop_name": "Mekhri Circle",
+          "fare": 240.0
+        },
+        {
+          "stop_name": "JC Nagara",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Nandidurga Road",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Coles Park",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "MEG Centre",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Halasuru",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Indiranagara KFC",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "HAL Main Gate",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Marathahalli Bridge",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Kundalahalli Gate",
+          "fare": 330.0
+        },
+        {
+          "stop_name": "AECS Layout Cross",
+          "fare": 330.0
+        },
+        {
+          "stop_name": "White Field TTMC",
+          "fare": 330.0
+        }
+      ]
+    },
+    "KIA-5": {
+      "route_info": "BANASHANKARI TTMC TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Hebbala",
+          "fare": 210.0
+        },
+        {
+          "stop_name": "Mekhri Circle",
+          "fare": 240.0
+        },
+        {
+          "stop_name": "Raj Mahal Guttahalli",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Cubbon Metro",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Shanthinagara TTMC",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Jayanagara TTMC",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Jayanagara 5th Block",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Indiragandhi Circle",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Banashankari Bus Station",
+          "fare": 320.0
+        }
+      ]
+    },
+    "KIA-5D": {
+      "route_info": "BRIGADE MEADOWS TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Hebbala",
+          "fare": 210.0
+        },
+        {
+          "stop_name": "Mekhri Circle",
+          "fare": 240.0
+        },
+        {
+          "stop_name": "Raj Mahal Guttahalli",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Cubbon Metro",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Shanthinagara TTMC",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Jayanagara TTMC",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Jayanagara 5th Block",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "JP Nagara 6th Phase",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Konanakunte Cross",
+          "fare": 320.0
+        },
+        {
+          "stop_name": "Thalagattapura",
+          "fare": 340.0
+        },
+        {
+          "stop_name": "Silk Institute (Nice Road Junction)",
+          "fare": 340.0
+        },
+        {
+          "stop_name": "Art of living",
+          "fare": 350.0
+        },
+        {
+          "stop_name": "Brigade Meadows Kanakapura Road",
+          "fare": 360.0
+        }
+      ]
+    },
+    "KIA-6": {
+      "route_info": "KADUGODI BUS STATION TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Hebbala",
+          "fare": 210.0
+        },
+        {
+          "stop_name": "Manyatha Tech Park",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Jn of Nagawara",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Tin Factory",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Marathahalli Bridge",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Kundalahalli Gate",
+          "fare": 330.0
+        },
+        {
+          "stop_name": "Siddapura",
+          "fare": 330.0
+        },
+        {
+          "stop_name": "Varthur Kodi",
+          "fare": 330.0
+        },
+        {
+          "stop_name": "White Field Post Office",
+          "fare": 330.0
+        },
+        {
+          "stop_name": "Hope Farm",
+          "fare": 330.0
+        },
+        {
+          "stop_name": "Kadugodi Bus Station",
+          "fare": 330.0
+        }
+      ]
+    },
+    "KIA-6A": {
+      "route_info": "KADUGODI BUS STATION TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Hebbala",
+          "fare": 210.0
+        },
+        {
+          "stop_name": "Mekhri Circle",
+          "fare": 240.0
+        },
+        {
+          "stop_name": "JC Nagara",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "GPO",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Manipal Centre",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Domluru",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "HAL Main Gate",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Marathahalli Bridge",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Siddapura",
+          "fare": 330.0
+        },
+        {
+          "stop_name": "Varthuru Kodi",
+          "fare": 330.0
+        },
+        {
+          "stop_name": "Kadugodi Bus Stand",
+          "fare": 330.0
+        }
+      ]
+    },
+    "KIA-6 (DOWN)": {
+      "route_info": "KADUGODI BUS STATION TO KIA (DOWN)",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Hebbala",
+          "fare": 210.0
+        },
+        {
+          "stop_name": "Manyatha Tech Park",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Jn of Nagawara",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Tin Factory",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Hoodi",
+          "fare": 320.0
+        },
+        {
+          "stop_name": "ITPL",
+          "fare": 330.0
+        },
+        {
+          "stop_name": "Hope Farm",
+          "fare": 330.0
+        },
+        {
+          "stop_name": "Kadugodi Bus Station",
+          "fare": 330.0
+        }
+      ]
+    },
+    "KIA-7": {
+      "route_info": "HSR LAYOUT KEB TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Hebbala",
+          "fare": 210.0
+        },
+        {
+          "stop_name": "Mekhri Circle",
+          "fare": 240.0
+        },
+        {
+          "stop_name": "Raj Mahal Guttahalli",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Vasanthnagara",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Cunningham Road",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Cubbon Metro",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Shanthinagara TTMC",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "St Johns Hospital",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Koramangala Water Tank",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "HSR BDA",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "HSR Layout KEB",
+          "fare": 310.0
+        }
+      ]
+    },
+    "KIA-7A": {
+      "route_info": "HSR LAYOUT BDA COMPLEX TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Hebbala",
+          "fare": 210.0
+        },
+        {
+          "stop_name": "Mekhri Circle",
+          "fare": 240.0
+        },
+        {
+          "stop_name": "Raj Mahal Guttahalli",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Shivajinagara Bus Station",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Trinity Circle",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Domluru",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Dell",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "HSR Layout Signal [OCR unclear in source PDF]",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Koramangala Water Tank",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "HSR Layout BDA Complex",
+          "fare": 300.0
+        }
+      ]
+    },
+    "KIA-8": {
+      "route_info": "ELECTRONIC CITY TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Hebbala",
+          "fare": 210.0
+        },
+        {
+          "stop_name": "Manyatha Tech Park",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Jn of Nagawara",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Tin Factory",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Marathahalli Bridge",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Kadubisanahalli (J P Morgan)",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Eco Space",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "HSR Layout 14th Main",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Central Silk Board",
+          "fare": 360.0
+        },
+        {
+          "stop_name": "Hosa Road",
+          "fare": 360.0
+        },
+        {
+          "stop_name": "Electronic City",
+          "fare": 390.0
+        }
+      ]
+    },
+    "KIA-8A": {
+      "route_info": "BTM LAYOUT TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Hebbala",
+          "fare": 210.0
+        },
+        {
+          "stop_name": "Manyatha Tech Park",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Jn of Nagawara",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Tin Factory",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Marathahalli Bridge",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Kadubisanahalli (J P Morgan)",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Eco Space",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "HSR Layout 14th Main",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Central Silk Board",
+          "fare": 360.0
+        },
+        {
+          "stop_name": "BTM Layout",
+          "fare": 360.0
+        }
+      ]
+    },
+    "KIA-8C": {
+      "route_info": "CHANDAPURA TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Hebbala",
+          "fare": 210.0
+        },
+        {
+          "stop_name": "Manyatha Tech Park",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Jn of Nagawara",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Tin Factory",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Marathahalli Bridge",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Kadubisanahalli (J P Morgan)",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Eco Space",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "HSR Layout 14th Main",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Central Silk Board",
+          "fare": 360.0
+        },
+        {
+          "stop_name": "Hosa Road",
+          "fare": 360.0
+        },
+        {
+          "stop_name": "Electronic City",
+          "fare": 390.0
+        },
+        {
+          "stop_name": "Chandapura",
+          "fare": 410.0
+        }
+      ]
+    },
+    "KIA-8D": {
+      "route_info": "WIPRO JUNCTION SARJAPURA ROAD TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Hebbala",
+          "fare": 210.0
+        },
+        {
+          "stop_name": "Manyatha Tech Park",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Jn of Nagawara",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Tin Factory",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Marathahalli Bridge",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Kadubisanahalli (J P Morgan)",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Eco Space",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Jn of Sarjapura Ring Road",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Doddakannalli",
+          "fare": 330.0
+        },
+        {
+          "stop_name": "Wipro Junction Sarjapura Road",
+          "fare": 340.0
+        },
+        {
+          "stop_name": "Dommasandra",
+          "fare": 360.0
+        },
+        {
+          "stop_name": "Sarjapura",
+          "fare": 400.0
+        }
+      ]
+    },
+    "KIA-8E": {
+      "route_info": "ELECTRONIC CITY WIPRO TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Beguru",
+          "fare": 170.0
+        },
+        {
+          "stop_name": "KIADB Hoovinayakanahalli Gate",
+          "fare": 170.0
+        },
+        {
+          "stop_name": "Bagaluru",
+          "fare": 170.0
+        },
+        {
+          "stop_name": "Kannuru",
+          "fare": 190.0
+        },
+        {
+          "stop_name": "Hennur Cross",
+          "fare": 260.0
+        },
+        {
+          "stop_name": "Tin Factory",
+          "fare": 260.0
+        },
+        {
+          "stop_name": "Marathahalli Bridge",
+          "fare": 290.0
+        },
+        {
+          "stop_name": "Kadubisanahalli (J P Morgan)",
+          "fare": 290.0
+        },
+        {
+          "stop_name": "Eco Space",
+          "fare": 290.0
+        },
+        {
+          "stop_name": "HSR Layout 14th Main",
+          "fare": 290.0
+        },
+        {
+          "stop_name": "Central Silk Board",
+          "fare": 340.0
+        },
+        {
+          "stop_name": "Hosa Road",
+          "fare": 340.0
+        },
+        {
+          "stop_name": "Electronic City",
+          "fare": 370.0
+        },
+        {
+          "stop_name": "Infosys Parking Lot",
+          "fare": 370.0
+        },
+        {
+          "stop_name": "Electronic City Wipro",
+          "fare": 380.0
+        }
+      ]
+    },
+    "KIA-9": {
+      "route_info": "KEMPEGOWDA BUS STATION TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Hunasamaranahalli",
+          "fare": 150.0
+        },
+        {
+          "stop_name": "Kogilu Cross",
+          "fare": 180.0
+        },
+        {
+          "stop_name": "Esteem Mall/Dairy Gate",
+          "fare": 190.0
+        },
+        {
+          "stop_name": "Hebbala",
+          "fare": 210.0
+        },
+        {
+          "stop_name": "Mekhri Circle",
+          "fare": 240.0
+        },
+        {
+          "stop_name": "Raj Mahal Guttahalli",
+          "fare": 290.0
+        },
+        {
+          "stop_name": "Kempegowda Bus Station",
+          "fare": 290.0
+        }
+      ]
+    },
+    "KIA-10": {
+      "route_info": "MYSORE ROAD BUS STATION TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Hebbala",
+          "fare": 210.0
+        },
+        {
+          "stop_name": "Mekhri Circle",
+          "fare": 240.0
+        },
+        {
+          "stop_name": "CPRI",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Yeshwanthapura TTMC",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Iskcon",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Rajajinagara 1st Block",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Magadi Road Tollgate",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Vijayanagara",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Mysore Road Bus Station (MCTC)",
+          "fare": 300.0
+        }
+      ]
+    },
+    "KIA-14": {
+      "route_info": "ROYAL MEENAKSHI MALL TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Hebbala",
+          "fare": 210.0
+        },
+        {
+          "stop_name": "Mekhri Circle",
+          "fare": 240.0
+        },
+        {
+          "stop_name": "Raj Mahal Guttahalli",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Cubbon Metro",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Shanthinagara TTMC",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Bengaluru Dairy Circle",
+          "fare": 290.0
+        },
+        {
+          "stop_name": "Jayadeva Hospital",
+          "fare": 340.0
+        },
+        {
+          "stop_name": "Hulimavu Gate",
+          "fare": 340.0
+        },
+        {
+          "stop_name": "Royal Meenakshi Mall",
+          "fare": 340.0
+        }
+      ]
+    },
+    "KIA-15": {
+      "route_info": "WHITEFIELD TTMC TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Beguru",
+          "fare": 170.0
+        },
+        {
+          "stop_name": "Hunusuru",
+          "fare": 170.0
+        },
+        {
+          "stop_name": "KIADB Circle",
+          "fare": 170.0
+        },
+        {
+          "stop_name": "Singahalli",
+          "fare": 170.0
+        },
+        {
+          "stop_name": "Budigere",
+          "fare": 190.0
+        },
+        {
+          "stop_name": "Manduru",
+          "fare": 250.0
+        },
+        {
+          "stop_name": "Katamanalluru Gate",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Kadugodi",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Hope Farm",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "ITPL",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Whitefield TTMC",
+          "fare": 300.0
+        }
+      ]
+    },
+    "KIA-15A": {
+      "route_info": "WHITEFIELD TTMC TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Beguru",
+          "fare": 170.0
+        },
+        {
+          "stop_name": "Hunusuru",
+          "fare": 170.0
+        },
+        {
+          "stop_name": "KIADB Circle",
+          "fare": 170.0
+        },
+        {
+          "stop_name": "Singahalli",
+          "fare": 170.0
+        },
+        {
+          "stop_name": "Budigere",
+          "fare": 190.0
+        },
+        {
+          "stop_name": "Manduru",
+          "fare": 250.0
+        },
+        {
+          "stop_name": "Katamanalluru Gate",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Kadugodi",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Hope Farm",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Varthur kodi",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Siddapura",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Kundalahalli Gate",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "AECS Layout Cross",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Whitefield TTMC",
+          "fare": 300.0
+        }
+      ]
+    },
+    "KIA-17": {
+      "route_info": "BEML LAYOUT 5TH STAGE TO KIA",
+      "stops": [
+        {
+          "stop_name": "Kempegowda International Airport",
+          "fare": 0.0
+        },
+        {
+          "stop_name": "Hebbala",
+          "fare": 210.0
+        },
+        {
+          "stop_name": "BEL Circle",
+          "fare": 240.0
+        },
+        {
+          "stop_name": "Goraguntepalya",
+          "fare": 280.0
+        },
+        {
+          "stop_name": "Summanahalli",
+          "fare": 300.0
+        },
+        {
+          "stop_name": "Nagarabhavi Circle",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Nayandahalli",
+          "fare": 310.0
+        },
+        {
+          "stop_name": "Rajarajeshwari Temple",
+          "fare": 320.0
+        },
+        {
+          "stop_name": "BEML Layout 5th stage",
+          "fare": 320.0
+        }
+      ]
+    }
+  },
+  "source": "kia_bus_stop_and__fare.pdf (Vayuvajra Services Main Bus Stop Wise Fare @05.01.2025)"
+}
