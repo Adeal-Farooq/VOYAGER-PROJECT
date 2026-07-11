@@ -39,9 +39,22 @@ async def load_bmtc_stops(session):
     for _, row in df.iterrows():
         num_trips = row.get("Num trips in stop")
         boothcode = row.get("Boothcode")
+
+        # "Routes with num trips" column ek Python-dict-jaisi string hai, jaise "{'242-LA': 8}"
+        routes_raw = row.get("Routes with num trips")
+        route_numbers = []
+        if pd.notna(routes_raw):
+            try:
+                parsed = ast.literal_eval(str(routes_raw))
+                if isinstance(parsed, dict):
+                    route_numbers = list(parsed.keys())
+            except (ValueError, SyntaxError):
+                route_numbers = []
+
         metadata = {
             "num_trips": float(num_trips) if pd.notna(num_trips) else None,
             "boothcode": str(boothcode) if pd.notna(boothcode) else None,
+            "routes": route_numbers,
         }
         node = TransitNode(
             name=str(row["Stop Name"]),

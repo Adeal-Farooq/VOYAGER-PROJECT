@@ -8,6 +8,7 @@ from app.models import user, transit, trip, raw_data
 
 # Routers
 from app.routers import transit as transit_router
+from app.routers import routing as routing_router
 
 
 @asynccontextmanager
@@ -28,6 +29,7 @@ app.add_middleware(
 )
 
 app.include_router(transit_router.router)
+app.include_router(routing_router.router)
 
 
 @app.get("/")

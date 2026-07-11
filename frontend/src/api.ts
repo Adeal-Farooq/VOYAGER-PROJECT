@@ -1,0 +1,81 @@
+import axios from "axios";
+
+const API_BASE_URL = "http://127.0.0.1:8000";
+
+export const apiClient = axios.create({
+  baseURL: API_BASE_URL,
+});
+
+export interface TransitNode {
+  id: number;
+  name: string;
+  type: "BMTC_BUS_STOP" | "METRO_STATION";
+  code: string | null;
+  latitude: number;
+  longitude: number;
+  metadata?: Record<string, unknown>;
+}
+
+export interface TransitNodesResponse {
+  count: number;
+  nodes: TransitNode[];
+}
+
+export async function fetchTransitNodes(
+  nodeType?: "BMTC_BUS_STOP" | "METRO_STATION",
+  limit: number = 1000
+): Promise<TransitNodesResponse> {
+  const params: Record<string, string | number> = { limit };
+  if (nodeType) params.node_type = nodeType;
+  const response = await apiClient.get<TransitNodesResponse>("/api/transit/nodes", { params });
+  return response.data;
+}
+
+export type TripMode = "WALK" | "BUS" | "METRO";
+
+export interface TripStep {
+  mode: TripMode;
+  label: string;
+  distance_km: number;
+  coordinates: [number, number][];
+}
+
+export interface TransitOption {
+  steps: TripStep[];
+  total_distance_km: number;
+  total_fare: number;
+  total_time_min: number;
+  congestion_factor: number;
+}
+
+export interface CabOption {
+  distance_km: number;
+  fare: number;
+  time_min: number;
+  congestion_factor: number;
+}
+
+export interface TripPlanResult {
+  time_slot: string;
+  transit_option: TransitOption;
+  cab_option: CabOption;
+}
+
+export async function planTrip(
+  sourceLat: number,
+  sourceLon: number,
+  destLat: number,
+  destLon: number,
+  timeSlot: "MORNING" | "AFTERNOON" | "EVENING" | "NIGHT"
+): Promise<TripPlanResult> {
+  const response = await apiClient.get<TripPlanResult>("/api/routing/plan-trip", {
+    params: {
+      source_lat: sourceLat,
+      source_lon: sourceLon,
+      dest_lat: destLat,
+      dest_lon: destLon,
+      time_slot: timeSlot,
+    },
+  });
+  return response.data;
+}
