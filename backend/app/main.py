@@ -4,7 +4,7 @@ from contextlib import asynccontextmanager
 from app.database.connection import engine, Base
 
 # Models import karna zaroori hai taaki Base unhe register kare
-from app.models import user, transit, trip, raw_data
+from app.models import user, transit, trip, raw_data, gtfs
 
 # Routers
 from app.routers import transit as transit_router

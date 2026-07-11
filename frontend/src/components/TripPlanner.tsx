@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import ReactMapGL, { Source, Layer, Marker, NavigationControl, type MapLayerMouseEvent } from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { planTrip, type TripPlanResult } from "../api";
+import { planTrip, fetchDirectBuses, type TripPlanResult, type DirectBusResult } from "../api";
 
 const BENGALURU_CENTER = { latitude: 12.9716, longitude: 77.5946, zoom: 12 };
 
@@ -44,6 +44,7 @@ export default function TripPlanner() {
   const [destPoint, setDestPoint] = useState<{ lat: number; lon: number } | null>(null);
   const [timeSlot, setTimeSlot] = useState<TimeSlot>("MORNING");
   const [result, setResult] = useState<TripPlanResult | null>(null);
+  const [directBuses, setDirectBuses] = useState<DirectBusResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -83,6 +84,15 @@ export default function TripPlanner() {
     } finally {
       setLoading(false);
     }
+
+    // Direct bus options alag se fetch karo (yeh fail ho sakta hai bina overall trip plan ko todE)
+    try {
+      const buses = await fetchDirectBuses(src.lat, src.lon, dst.lat, dst.lon);
+      setDirectBuses(buses);
+    } catch (err) {
+      setDirectBuses(null);
+      console.error("Direct bus fetch failed:", err);
+    }
   }
 
   function handleTimeSlotChange(slot: TimeSlot) {
@@ -96,6 +106,7 @@ export default function TripPlanner() {
     setSourcePoint(null);
     setDestPoint(null);
     setResult(null);
+    setDirectBuses(null);
     setError(null);
   }
 
@@ -158,7 +169,7 @@ export default function TripPlanner() {
             </div>
           </div>
 
-          <div style={{ maxHeight: 220, overflowY: "auto" }}>
+          <div style={{ maxHeight: 180, overflowY: "auto" }}>
             {result.transit_option.steps.map((step, idx) => (
               <div key={idx} style={stepRowStyle}>
                 <span style={{ fontSize: 18, marginRight: 8 }}>{MODE_ICONS[step.mode]}</span>
@@ -166,6 +177,29 @@ export default function TripPlanner() {
               </div>
             ))}
           </div>
+
+          {directBuses && directBuses.direct_bus_options.length > 0 && (
+            <div style={{ marginTop: 12, paddingTop: 12, borderTop: "1px solid #E5E7EB" }}>
+              <div style={{ fontWeight: 600, fontSize: 13, marginBottom: 6 }}>
+                🚌 Direct Buses (real BMTC schedule)
+              </div>
+              <div style={{ maxHeight: 140, overflowY: "auto" }}>
+                {directBuses.direct_bus_options.map((bus, idx) => (
+                  <div key={idx} style={{ ...stepRowStyle, flexDirection: "column", alignItems: "flex-start" }}>
+                    <div style={{ fontSize: 13, fontWeight: 600 }}>
+                      Bus {bus.route_number} {bus.headsign ? `→ ${bus.headsign}` : ""}
+                    </div>
+                    <div style={{ fontSize: 12, color: "#6B7280" }}>
+                      {bus.departure_time} → {bus.arrival_time} · {bus.stops_between} stops · ₹
+                      {bus.fare}
+                      {bus.fare_is_estimated ? " (est.)" : ""}
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div style={{ fontSize: 11, color: "#9CA3AF", marginTop: 6 }}>{directBuses.note}</div>
+            </div>
+          )}
         </div>
       )}
 
@@ -279,6 +313,8 @@ const resultsPanelStyle: React.CSSProperties = {
   left: 16,
   right: 16,
   maxWidth: 480,
+  maxHeight: "70vh",
+  overflowY: "auto",
   zIndex: 10,
   background: "white",
   padding: "16px 20px",

@@ -23,3 +23,5 @@ dist-ssr
 *.sln
 *.sw?
 .env
+stop_times.txt
+backend/data_files/gtfs/

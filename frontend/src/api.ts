@@ -79,3 +79,33 @@ export async function planTrip(
   });
   return response.data;
 }
+
+export interface DirectBusOption {
+  route_number: string;
+  route_name: string;
+  headsign: string | null;
+  departure_time: string;
+  arrival_time: string;
+  stops_between: number;
+  fare: number;
+  fare_is_estimated: boolean;
+}
+
+export interface DirectBusResult {
+  nearest_source_stop: { stop_id: string; stop_name: string; distance_km: number };
+  nearest_dest_stop: { stop_id: string; stop_name: string; distance_km: number };
+  direct_bus_options: DirectBusOption[];
+  note: string;
+}
+
+export async function fetchDirectBuses(
+  sourceLat: number,
+  sourceLon: number,
+  destLat: number,
+  destLon: number
+): Promise<DirectBusResult> {
+  const response = await apiClient.get<DirectBusResult>("/api/routing/direct-buses", {
+    params: { source_lat: sourceLat, source_lon: sourceLon, dest_lat: destLat, dest_lon: destLon },
+  });
+  return response.data;
+}

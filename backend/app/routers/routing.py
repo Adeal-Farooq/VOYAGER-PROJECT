@@ -24,6 +24,8 @@ from app.services.graph.multimodal import (
     CAB_BASE_SPEED_KMH,
 )
 
+from app.services.graph.direct_bus import find_nearby_gtfs_stops, find_direct_bus_options
+
 router = APIRouter(prefix="/api/routing", tags=["routing"])
 
 
@@ -181,4 +183,43 @@ async def plan_trip(
         "time_slot": time_slot,
         "transit_option": transit_option,
         "cab_option": cab_option,
+    }
+
+
+@router.get("/direct-buses")
+async def get_direct_buses(
+    source_lat: float = Query(...),
+    source_lon: float = Query(...),
+    dest_lat: float = Query(...),
+    dest_lon: float = Query(...),
+    db: AsyncSession = Depends(get_db),
+):
+    """
+    REAL BMTC GTFS schedule data use karke batata hai — kaunsi bus number(s)
+    seedhi (direct) jaati hain, kis scheduled time pe, kitne stops ke saath,
+    aur real fare (jahan data available hai).
+    """
+    source_stops = await find_nearby_gtfs_stops(db, source_lat, source_lon, radius_km=1.0)
+    dest_stops = await find_nearby_gtfs_stops(db, dest_lat, dest_lon, radius_km=1.0)
+
+    if not source_stops or not dest_stops:
+        raise HTTPException(
+            status_code=404,
+            detail="Is area mein GTFS bus stops nahi mile (source ya dest ke 1km radius mein).",
+        )
+
+    source_ids = [s["stop_id"] for s in source_stops]
+    dest_ids = [s["stop_id"] for s in dest_stops]
+
+    direct_options = await find_direct_bus_options(db, source_ids, dest_ids)
+
+    return {
+        "nearest_source_stop": source_stops[0],
+        "nearest_dest_stop": dest_stops[0],
+        "direct_bus_options": direct_options,
+        "note": (
+            "Yeh real BMTC scheduled timetable hai (live GPS tracking nahi). "
+            "Agar koi direct option nahi dikha, matlab in stops ke beech koi seedhi "
+            "bus route nahi hai — transfer ke saath jana padega."
+        ),
     }

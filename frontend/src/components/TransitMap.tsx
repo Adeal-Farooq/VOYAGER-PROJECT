@@ -3,13 +3,21 @@ import ReactMapGL, { Source, Layer, Popup, NavigationControl, type MapRef, type 
 import "maplibre-gl/dist/maplibre-gl.css";
 import { fetchTransitNodes, fetchRoute, type TransitNode, type RouteResult } from "../api";
 
-const BENGALURU_CENTER = {
-  latitude: 12.9716,
-  longitude: 77.5946,
-  zoom: 11,
-};
+const BENGALURU_CENTER = { latitude: 12.9716, longitude: 77.5946, zoom: 12 };
 
-const MAP_STYLE = "https://demotiles.maplibre.org/style.json";
+// Real OpenStreetMap raster tiles (free, no API key)
+const MAP_STYLE = {
+  version: 8 as const,
+  sources: {
+    "osm-tiles": {
+      type: "raster" as const,
+      tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+      tileSize: 256,
+      attribution: "© OpenStreetMap contributors",
+    },
+  },
+  layers: [{ id: "osm-layer", type: "raster" as const, source: "osm-tiles" }],
+};
 
 type NodeFilter = "BMTC_BUS_STOP" | "METRO_STATION";
 type TimeSlot = "MORNING" | "AFTERNOON" | "EVENING" | "NIGHT";
@@ -52,7 +60,6 @@ export default function TransitMap() {
     setRouteError(null);
   }, [filter]);
 
-  // Re-run route calculation jab time slot badle (agar route already selected hai)
   useEffect(() => {
     if (routeSource && routeTarget) {
       calculateRoute(routeSource, routeTarget);
@@ -114,7 +121,6 @@ export default function TransitMap() {
     setRouteError(null);
   }
 
-  // Saare stops ko ek GeoJSON FeatureCollection mein convert karo (fast native rendering ke liye)
   const stopsGeoJson = {
     type: "FeatureCollection" as const,
     features: nodes.map((node) => ({
@@ -124,10 +130,7 @@ export default function TransitMap() {
         isSource: routeSource?.id === node.id,
         isTarget: routeTarget?.id === node.id,
       },
-      geometry: {
-        type: "Point" as const,
-        coordinates: [node.longitude, node.latitude],
-      },
+      geometry: { type: "Point" as const, coordinates: [node.longitude, node.latitude] },
     })),
   };
 
@@ -247,22 +250,12 @@ export default function TransitMap() {
         )}
 
         <Source id="stops" type="geojson" data={stopsGeoJson}>
-          {/* Bada invisible click-target circle — accurate clicking ke liye */}
-          <Layer
-            id="stops-hitbox"
-            type="circle"
-            paint={{ "circle-radius": 12, "circle-opacity": 0 }}
-          />
+          <Layer id="stops-hitbox" type="circle" paint={{ "circle-radius": 12, "circle-opacity": 0 }} />
           <Layer
             id="stops-layer"
             type="circle"
             paint={{
-              "circle-radius": [
-                "case",
-                ["any", ["get", "isSource"], ["get", "isTarget"]],
-                8,
-                4,
-              ],
+              "circle-radius": ["case", ["any", ["get", "isSource"], ["get", "isTarget"]], 8, 4],
               "circle-color": [
                 "case",
                 ["get", "isSource"], "#DC2626",
