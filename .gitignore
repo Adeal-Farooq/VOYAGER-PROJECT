@@ -1,1 +1,19 @@
 backend/data_files/gtfs/
+# GTFS dataset
+backend/data_files/gtfs/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual environment
+.venv/
+venv/
+
+# Node modules
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+backend/data_files/gtfs/
