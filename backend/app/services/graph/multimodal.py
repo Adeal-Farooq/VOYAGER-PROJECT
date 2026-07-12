@@ -16,7 +16,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.services.graph.engine import haversine_km, get_congestion_factor
 
-WALK_RADIUS_KM = 1.2        # source/dest se kitni door tak walk karke stop dhundna hai
+WALK_RADIUS_KM = 2.0        # source/dest se kitni door tak walk karke stop dhundna hai (outskirts ke liye zyada rakha)
 TRANSFER_RADIUS_KM = 0.5    # bus-metro transfer ke liye max walk distance
 MAX_BUS_EDGE_KM = 2.0
 MAX_BUS_NEIGHBORS = 6
@@ -35,17 +35,29 @@ ROAD_DETOUR_FACTOR = 1.3        # straight-line distance ko real road distance k
 
 
 async def get_cab_fare_per_km(session: AsyncSession) -> float:
-    """Real ride_bookings data se average cab fare/km nikalta hai"""
+    """
+    Real ride_bookings data se cab fare/km nikalta hai — MEDIAN use karte hain
+    (average outlier trips se skew ho jaata tha, jaise koi galat data ya
+    premium vehicle ka bahut zyada fare, jo overall rate ko bahut upar utha deta tha).
+    """
     query = text("""
-        SELECT AVG(total_fare / distance_km) as avg_rate
+        SELECT (total_fare / distance_km) as rate
         FROM ride_bookings
         WHERE booking_status = 'Success'
           AND distance_km BETWEEN 1 AND 40
           AND total_fare > 0
+          AND vehicle_type IN ('Uber Go', 'Go Sedan', 'Mini', 'eBike', 'Auto')
+        ORDER BY rate
     """)
     result = await session.execute(query)
-    rate = result.scalar()
-    return float(rate) if rate else DEFAULT_CAB_FARE_PER_KM
+    rates = [float(row.rate) for row in result.all()]
+
+    if not rates:
+        return DEFAULT_CAB_FARE_PER_KM
+
+    median_rate = rates[len(rates) // 2]
+    # Realistic Bengaluru cab fare sanity bounds — extreme outliers clamp kar do
+    return max(8.0, min(median_rate, 22.0))
 
 
 async def fetch_nodes_in_bbox(session: AsyncSession, min_lat, max_lat, min_lon, max_lon):

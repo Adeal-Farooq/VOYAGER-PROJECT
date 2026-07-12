@@ -38,6 +38,13 @@ export interface TripStep {
   label: string;
   distance_km: number;
   coordinates: [number, number][];
+  bus_details?: {
+    route_number: string;
+    departure_time: string;
+    arrival_time: string;
+    fare: number;
+    fare_is_estimated: boolean;
+  };
 }
 
 export interface TransitOption {
@@ -89,6 +96,8 @@ export interface DirectBusOption {
   stops_between: number;
   fare: number;
   fare_is_estimated: boolean;
+  trip_id?: string;
+  real_road_shape?: [number, number][];
 }
 
 export interface DirectBusResult {
@@ -102,10 +111,11 @@ export async function fetchDirectBuses(
   sourceLat: number,
   sourceLon: number,
   destLat: number,
-  destLon: number
+  destLon: number,
+  afterTime: string = "00:00:00"
 ): Promise<DirectBusResult> {
   const response = await apiClient.get<DirectBusResult>("/api/routing/direct-buses", {
-    params: { source_lat: sourceLat, source_lon: sourceLon, dest_lat: destLat, dest_lon: destLon },
+    params: { source_lat: sourceLat, source_lon: sourceLon, dest_lat: destLat, dest_lon: destLon, after_time: afterTime },
   });
   return response.data;
 }

@@ -2,6 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy import text
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import Literal
+from datetime import datetime
 
 from app.database.connection import get_db
 from app.services.graph.engine import (
@@ -120,7 +121,10 @@ async def plan_trip(
     source = {"lat": source_lat, "lon": source_lon, "name": "Aapki Location"}
     dest = {"lat": dest_lat, "lon": dest_lon, "name": "Destination"}
 
-    buffer_deg = 0.025
+    # Buffer ko trip ki actual distance ke hisaab se scale karo — chote trip ke liye chota,
+    # lambe trip ke liye bada buffer, taaki humesha kaafi candidate nodes milein
+    straight_line_km_for_buffer = haversine_km(source_lat, source_lon, dest_lat, dest_lon)
+    buffer_deg = max(0.03, (straight_line_km_for_buffer / 111.0) * 0.35)
     min_lat = min(source_lat, dest_lat) - buffer_deg
     max_lat = max(source_lat, dest_lat) + buffer_deg
     min_lon = min(source_lon, dest_lon) - buffer_deg
@@ -143,9 +147,42 @@ async def plan_trip(
             total_distance = sum(s["distance_km"] for s in steps)
             total_fare = 0.0
             total_time = 0.0
+
+            now = datetime.now()
+            current_time_str = now.strftime("%H:%M:%S")
+
             for s in steps:
                 total_time += estimate_time_minutes(s["distance_km"], s["mode"], congestion)
                 if s["mode"] == "BUS":
+                    # Is specific leg ke liye REAL bus number + schedule dhoondo (GTFS se)
+                    leg_start = s["coordinates"][0]   # [lon, lat]
+                    leg_end = s["coordinates"][-1]
+                    try:
+                        src_stops = await find_nearby_gtfs_stops(db, leg_start[1], leg_start[0], radius_km=0.6)
+                        dst_stops = await find_nearby_gtfs_stops(db, leg_end[1], leg_end[0], radius_km=0.6)
+                        if src_stops and dst_stops:
+                            bus_opts = await find_direct_bus_options(
+                                db,
+                                [x["stop_id"] for x in src_stops],
+                                [x["stop_id"] for x in dst_stops],
+                                after_time=current_time_str,
+                                max_results=1,
+                            )
+                            if bus_opts:
+                                s["bus_details"] = {
+                                    "route_number": bus_opts[0]["route_number"],
+                                    "departure_time": bus_opts[0]["departure_time"],
+                                    "arrival_time": bus_opts[0]["arrival_time"],
+                                    "fare": bus_opts[0]["fare"],
+                                    "fare_is_estimated": bus_opts[0]["fare_is_estimated"],
+                                }
+                                # Isi specific bus ka REAL road-shape bhi attach karo
+                                # (generic/unrelated shape nahi — sirf yehi jo plan mein use ho raha hai)
+                                if bus_opts[0].get("real_road_shape"):
+                                    s["coordinates"] = bus_opts[0]["real_road_shape"]
+                    except Exception:
+                        pass  # real data na mile to generic estimate hi rehne do
+
                     total_fare += s["distance_km"] * 2.0
                 elif s["mode"] == "METRO":
                     total_fare += 10.0 + s["distance_km"] * 2.0
@@ -192,6 +229,7 @@ async def get_direct_buses(
     source_lon: float = Query(...),
     dest_lat: float = Query(...),
     dest_lon: float = Query(...),
+    after_time: str = Query("00:00:00", description="HH:MM:SS format — isके baad wali agli buses dikhayega"),
     db: AsyncSession = Depends(get_db),
 ):
     """
@@ -211,7 +249,7 @@ async def get_direct_buses(
     source_ids = [s["stop_id"] for s in source_stops]
     dest_ids = [s["stop_id"] for s in dest_stops]
 
-    direct_options = await find_direct_bus_options(db, source_ids, dest_ids)
+    direct_options = await find_direct_bus_options(db, source_ids, dest_ids, after_time=after_time)
 
     return {
         "nearest_source_stop": source_stops[0],

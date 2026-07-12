@@ -84,11 +84,14 @@ async def find_direct_bus_options(
     session: AsyncSession,
     source_stop_ids: list[str],
     dest_stop_ids: list[str],
+    after_time: str = "00:00:00",
     max_results: int = 8,
 ):
     """
     Real GTFS data mein dhoondta hai — kaunsi trips hain jo source stops se
     hoke dest stops tak seedhi (direct, bina transfer ke) jaati hain.
+    `after_time` (HH:MM:SS) ke baad wali agli buses dikhata hai — current/selected
+    time ke hisaab se relevant results milte hain, hamesha subah 12 baje wali nahi.
     """
     if not source_stop_ids or not dest_stop_ids:
         return []
@@ -98,6 +101,7 @@ async def find_direct_bus_options(
             r.route_short_name,
             r.route_long_name,
             t.trip_headsign,
+            st1.trip_id,
             st1.stop_id as from_stop_id,
             st2.stop_id as to_stop_id,
             st1.departure_time,
@@ -115,12 +119,14 @@ async def find_direct_bus_options(
         JOIN gtfs_stops s2 ON st2.stop_id = s2.stop_id
         WHERE st1.stop_id = ANY(:source_ids)
           AND st2.stop_id = ANY(:dest_ids)
+          AND st1.departure_time >= :after_time
         ORDER BY st1.departure_time
         LIMIT :limit
     """)
     result = await session.execute(query, {
         "source_ids": source_stop_ids,
         "dest_ids": dest_stop_ids,
+        "after_time": after_time,
         "limit": max_results * 3,  # extra fetch karo, phir dedupe karenge
     })
     rows = result.all()
@@ -164,8 +170,23 @@ async def find_direct_bus_options(
             "stops_between": row.stops_between,
             "fare": fare,
             "fare_is_estimated": fare_is_estimated,
+            "trip_id": row.trip_id,
         })
         if len(options) >= max_results:
             break
+
+    # Sirf TOP option ka real road-shape fetch karo (perf ke liye baaki sab ka nahi)
+    if options:
+        top_trip_id = options[0]["trip_id"]
+        shape_query = text("""
+            SELECT sp.lat, sp.lon
+            FROM gtfs_shape_points sp
+            JOIN gtfs_trips t ON sp.shape_id = t.shape_id
+            WHERE t.trip_id = :trip_id
+            ORDER BY sp.sequence
+        """)
+        shape_result = await session.execute(shape_query, {"trip_id": top_trip_id})
+        shape_points = shape_result.all()
+        options[0]["real_road_shape"] = [[p.lon, p.lat] for p in shape_points]
 
     return options
