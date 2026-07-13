@@ -26,6 +26,7 @@ from app.services.graph.multimodal import (
 )
 
 from app.services.graph.direct_bus import find_nearby_gtfs_stops, find_direct_bus_options
+from app.services.graph.osrm import get_osrm_route
 
 router = APIRouter(prefix="/api/routing", tags=["routing"])
 
@@ -153,6 +154,18 @@ async def plan_trip(
 
             for s in steps:
                 total_time += estimate_time_minutes(s["distance_km"], s["mode"], congestion)
+
+                if s["mode"] == "WALK":
+                    # Real walking path (footpath-following) OSRM se lao
+                    leg_start = s["coordinates"][0]
+                    leg_end = s["coordinates"][-1]
+                    osrm_result = await get_osrm_route(
+                        leg_start[1], leg_start[0], leg_end[1], leg_end[0], profile="foot"
+                    )
+                    if osrm_result:
+                        s["coordinates"] = osrm_result["coordinates"]
+                        s["distance_km"] = osrm_result["distance_km"]
+
                 if s["mode"] == "BUS":
                     # Is specific leg ke liye REAL bus number + schedule dhoondo (GTFS se)
                     leg_start = s["coordinates"][0]   # [lon, lat]
@@ -196,18 +209,30 @@ async def plan_trip(
             }
 
     # --- Cab option (hamesha calculate karo, comparison ke liye) ---
-    straight_line_km = haversine_km(source_lat, source_lon, dest_lat, dest_lon)
-    cab_distance_km = round(straight_line_km * ROAD_DETOUR_FACTOR, 2)
+    osrm_driving = await get_osrm_route(source_lat, source_lon, dest_lat, dest_lon, profile="driving")
+
+    if osrm_driving:
+        cab_distance_km = osrm_driving["distance_km"]
+        cab_route_coordinates = osrm_driving["coordinates"]
+        # OSRM ka duration free-flow hota hai, congestion factor se adjust karte hain
+        cab_time_min = round(osrm_driving["duration_min"] * (1 + 0.5 * congestion), 1)
+    else:
+        # OSRM fail ho jaye (rare) to purana straight-line fallback
+        straight_line_km = haversine_km(source_lat, source_lon, dest_lat, dest_lon)
+        cab_distance_km = round(straight_line_km * ROAD_DETOUR_FACTOR, 2)
+        cab_route_coordinates = None
+        cab_speed = CAB_BASE_SPEED_KMH * (1 - 0.4 * congestion)
+        cab_time_min = round((cab_distance_km / cab_speed) * 60, 1)
+
     cab_fare_per_km = await get_cab_fare_per_km(db)
     cab_fare = round(cab_distance_km * cab_fare_per_km * (1 + SURGE_MULTIPLIER * congestion), 2)
-    cab_speed = CAB_BASE_SPEED_KMH * (1 - 0.4 * congestion)
-    cab_time_min = round((cab_distance_km / cab_speed) * 60, 1)
 
     cab_option = {
         "distance_km": cab_distance_km,
         "fare": cab_fare,
         "time_min": cab_time_min,
         "congestion_factor": round(congestion, 2),
+        "route_coordinates": cab_route_coordinates,
     }
 
     if transit_option is None:

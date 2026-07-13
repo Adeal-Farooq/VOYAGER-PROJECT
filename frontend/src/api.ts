@@ -60,6 +60,7 @@ export interface CabOption {
   fare: number;
   time_min: number;
   congestion_factor: number;
+  route_coordinates: [number, number][] | null;
 }
 
 export interface TripPlanResult {
